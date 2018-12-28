@@ -1,2 +1,41 @@
 ---
 # tasks file for base_ami
+
+# Yum update
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+  # Install git
+- name: Install Git
+  yum: 
+    name: git
+    state: latest
+
+
+  #Install EPEL repo
+- name: Install EPEL repo
+  yum: 
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+  
+  #Install ansible
+- name: Install ansible
+  yum: 
+    name: ansible
+    state: latest
+
+#Install Prometheus Node Exporter
+- name: Download Prometheus Node Exporter
+  get url:
+    url: https://github.com/prometheus/node_exporter/releases/download/v0.17.0/node_exporter-0.17.0.linux-amd64.tar.gz
+    dest: /tmp/
+
+- name: Unarchive node exporter
+    src: /tmp/node_exporter-0.17.0.linux-amd64.tar.gz
+    dest: /opt/prometheus_node_exporter/
+
+#Start Prometheus Node Exporter
+- name: Run Prometheus Node Exporter
+    command: ./opt/prometheus_node_exporter/node_exporter-0.17.0.linux-amd64/node_exporter
