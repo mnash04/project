@@ -15,19 +15,19 @@
     line: 'SELINUX=disable'
 
 # Create 4G Swap file
-- name: Write Swapfile
-  command: dd if=/dev/zero of=/swapfile bs=1M count=4048
+# - name: Write Swapfile
+#  command: dd if=/dev/zero of=/swapfile bs=1M count=4048
   
-- name: Set swapfile permissions
-  file: path=/swapfile mode=600
+#- name: Set swapfile permissions
+#  file: path=/swapfile mode=600
 
-- name: Create swapfile
-  command: mkswap /swapfile
+#- name: Create swapfile
+#  command: mkswap /swapfile
 
-- name: Enable swapfile
-  command: swapon /swapfile
+#- name: Enable swapfile
+#  command: swapon /swapfile 
 
-- name: add swapfile to /etc/fstab
+- name: add swapfile to /etc/fstab'
   lineinfile: 
     path: /etc/fstab/
     line: "/swapfile   none   swap   sw   0   0" 
