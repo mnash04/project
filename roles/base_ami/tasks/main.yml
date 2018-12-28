@@ -19,7 +19,7 @@
   command: dd if=/dev/zero of=/swapfile bs=1M count=4048
   
 - name: Set swapfile permissions
-  file: path = /swapfile mode=600
+  file: path=/swapfile mode=600
 
 - name: Create swapfile
   command: mkswap /swapfile
