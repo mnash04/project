@@ -9,7 +9,7 @@
 
 #Disable SELINUX
 - name: Disable SELINUX
-    lineinfile:
+  lineinfile:
     path: /etc/selinux/config
     regexp: '^SELINUX='
     line: 'SELINUX=disable'
