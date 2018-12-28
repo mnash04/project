@@ -15,7 +15,7 @@
     line: 'SELINUX=disable'
 
 # Create 4G Swap file
- - name: Write Swapfile
+- name: Write Swapfile
   command: dd if=/dev/zero of=/swapfile bs=1M count=4048
   
 - name: Set swapfile permissions
