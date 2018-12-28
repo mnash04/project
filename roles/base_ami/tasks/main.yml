@@ -6,7 +6,31 @@
   yum:
     name: '*'
     state: latest
+
+#Disable SELINUX
+- name: Disable SELINUX
+    lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: 'SELINUX=disable'
+
+# Create 4G Swap file
+- name: Write Swapfile
+    command: dd if=/dev/zero of=/swapfile bs=1M count=4048
   
+- name: Set swapfile permissions
+    file: path = /swapfile mode=600
+
+- name: Create swapfile
+    command: mkswap /swapfile
+
+- name: Enable swapfile
+  command: swapon /swapfile
+
+-name: add swapfile to /etc/fstab
+ lineinfile: dest=/etc/fstab/ line="/swapfile   none   swap   sw   0   0" state=present
+
+
   # Create Directories
 - file:
     path: /opt/prometheus_node_exporter/
