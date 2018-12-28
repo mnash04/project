@@ -6,6 +6,12 @@
   yum:
     name: '*'
     state: latest
+  
+  # Create Directories
+- file:
+    path: /opt/prometheus_node_exporter/
+    state: directory
+    mode: 0755
 
   # Install git
 - name: Install Git
@@ -26,12 +32,13 @@
     name: ansible
     state: latest
 
-#Install Prometheus Node Exporter
+#Download Node Exporter
 - name: Download Prometheus Node Exporter
   get_url:
     url: https://github.com/prometheus/node_exporter/releases/download/v0.17.0/node_exporter-0.17.0.linux-amd64.tar.gz
     dest: /tmp/
 
+#Unarchive Node Exporter
 - name: Unarchive node exporter
   unarchive:  
     src: /tmp/node_exporter-0.17.0.linux-amd64.tar.gz
