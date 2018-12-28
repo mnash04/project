@@ -15,17 +15,17 @@
     line: 'SELINUX=disable'
 
 # Create 4G Swap file
-# - name: Write Swapfile
-#  command: dd if=/dev/zero of=/swapfile bs=1M count=4048
+ - name: Write Swapfile
+  command: dd if=/dev/zero of=/swapfile bs=1M count=4048
   
-#- name: Set swapfile permissions
-#  file: path=/swapfile mode=600
+- name: Set swapfile permissions
+  file: path=/swapfile mode=600
 
-#- name: Create swapfile
-#  command: mkswap /swapfile
+- name: Create swapfile
+  command: mkswap /swapfile
 
-#- name: Enable swapfile
-#  command: swapon /swapfile 
+- name: Enable swapfile
+  command: swapon /swapfile 
 
 - name: add swapfile to /etc/fstab'
   lineinfile: 
@@ -74,3 +74,7 @@
 #Start Prometheus Node Exporter
 - name: Start Prometheus Node Exporter
   shell: /opt/prometheus_node_exporter/node_exporter-0.17.0.linux-amd64/node_exporter &
+
+#Reboot the server
+- name: Reboot the server
+  reboot: 
