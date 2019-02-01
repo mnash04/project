@@ -34,7 +34,7 @@
     state: present
 
 
-  # Create Directories
+# Create Directories
 - file:
     path: /opt/prometheus_node_exporter/
  
