@@ -56,9 +56,32 @@
 - name: Start Prometheus Node Exporter
   shell: /opt/prometheus_node_exporter/node_exporter-0.17.0.linux-amd64/node_exporter &
 
+#Create cronjob to start node exporter on boot
+- cron:
+    name: "a job for reboot"
+    special_time: reboot
+    job: "/opt/prometheus_node_exporter/node_exporter-0.17.0.linux-amd64/node_exporter"
+
 #Install Filebeats for log shipping
 - name: Install filebeats
   yum:
     name: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.5.4-x86_64.rpm
     state: present
 
+#Install Docker
+- name: install the latest version of Docker
+  yum:
+    name: docker
+    state: latest
+
+#Enable docker 
+- name: Enable service docker, and not touch the state
+  service:
+    name: docker
+    enabled: yes
+
+#Enable filebeat
+- name: Enable service filebeat, and not touch the state
+  service:
+    name: filebeat
+    enabled: yes
