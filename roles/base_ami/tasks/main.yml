@@ -85,3 +85,28 @@
   service:
     name: filebeat
     enabled: yes
+
+#Install OSSEC
+- name: Download OSSEC
+  get_url: 
+    url: https://github.com/ossec/ossec-hids/archive/3.2.0.tar.gz
+    dest: /tmp/
+
+#Unarchive OSSEC
+- name: Unarchive node exporter
+  unarchive:  
+    src: /tmp/3.2.0.tar.gz
+    dest: /opt/ossec/
+
+#Copy unattended install configuration file
+- name: example copying file with owner and permissions
+  copy:
+    src: /opt/ossec/contrib/specs/local/preloaded-vars.conf
+    dest: /opt/ossec/etc/preloaded-vars.conf
+
+#Add json output to ossec config 
+- lineinfile:
+    path: /var/ossec/etc/ossec.conf
+    regexp: '<global>'
+    insertafter: '^<global>'
+    line: ' <jsonout_output>yes</jsonout_output>'
