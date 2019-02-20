@@ -34,7 +34,7 @@
     state: present
 
 
-# Create Directories
+# Create Directory
 - file:
     path: /opt/prometheus_node_exporter/
     state: directory
@@ -92,21 +92,32 @@
     url: https://github.com/ossec/ossec-hids/archive/3.2.0.tar.gz
     dest: /tmp/
 
+# Create Directories
+- file:
+    path: /opt/ossec/
+    state: directory
+    mode: 0755
+
 #Unarchive OSSEC
-- name: Unarchive node exporter
+- name: Unarchive OSSEC
   unarchive:  
-    src: /tmp/3.2.0.tar.gz
+    src: /tmp/ossec-hids-3.2.0.tar.gz
     dest: /opt/ossec/
 
 #Copy unattended install configuration file
-- name: example copying file with owner and permissions
+- name: Copy file
   copy:
-    src: /opt/ossec/contrib/specs/local/preloaded-vars.conf
-    dest: /opt/ossec/etc/preloaded-vars.conf
+    src: /opt/ossec/ossec-hids-3.2.0/contrib/specs/local/preloaded-vars.conf
+    dest: /opt/ossec/ossec-hids-3.2.0/etc/preloaded-vars.conf
+
+#Install OSSEC
+- name: Install OSSEC
+  shell: /opt/ossec/ossec-hids-3.2.0/install.sh &
 
 #Add json output to ossec config 
 - lineinfile:
-    path: /var/ossec/etc/ossec.conf
+    path: /var/ossec/ossec-hids-3.2.0/etc/ossec.conf
     regexp: '<global>'
     insertafter: '^<global>'
     line: ' <jsonout_output>yes</jsonout_output>'
+
