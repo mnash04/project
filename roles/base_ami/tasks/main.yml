@@ -116,7 +116,7 @@
 
 #Add json output to ossec config 
 - lineinfile:
-    path: /var/ossec/ossec-hids-3.2.0/etc/ossec.conf
+    path: /var/ossec/etc/ossec.conf
     regexp: '<global>'
     insertafter: '^<global>'
     line: ' <jsonout_output>yes</jsonout_output>'
