@@ -89,7 +89,7 @@
 - name: insert json config in filebeat.yml
   blockinfile:
     path: /etc/filebeat/filebeat.yml
-    insertafter: #multiline.match: after
+    insertafter: "#multiline.match: after"
     block: |2
       - type: log
         paths:
