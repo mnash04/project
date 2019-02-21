@@ -86,6 +86,16 @@
     name: filebeat
     enabled: yes
 
+- name: insert json config in filebeat.yml
+  blockinfile:
+    path: /etc/filebeat/filebeat.yml
+    block: |2
+      - type: log
+        paths:
+        - /var/ossec/logs/alerts/alerts.json
+        json.keys_under_root: true
+        fields: {log_type: osseclogs}
+
 #Install OSSEC
 - name: Download OSSEC
   get_url: 
