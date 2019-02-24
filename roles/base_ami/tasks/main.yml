@@ -134,15 +134,11 @@
 
 #Install OSSEC
 - name: Install OSSEC
-  shell: /opt/ossec/ossec-hids-3.2.0/install.sh &
-
-#wait for ossec install to finish
-- pause: 
-    seconds: 30
+  shell: /opt/ossec/ossec-hids-3.2.0/install.sh
 
 #Add json output to ossec config 
 - lineinfile:
-    path: /var/ossec/etc/ossec.conf
+    path: vi 
     regexp: '<global>'
     insertafter: '^<global>'
     line: '<global> <jsonout_output>yes</jsonout_output>'
