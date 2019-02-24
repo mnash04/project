@@ -136,6 +136,10 @@
 - name: Install OSSEC
   shell: /opt/ossec/ossec-hids-3.2.0/install.sh &
 
+#wait for ossec install to finish
+- pause: 
+    seconds: 30
+
 #Add json output to ossec config 
 - lineinfile:
     path: /var/ossec/etc/ossec.conf
