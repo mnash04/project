@@ -7,6 +7,17 @@
     name: '*'
     state: latest
 
+#Yum install packages
+- name: Install packages
+  yum:
+    name: 
+      - gcc 
+      - inotify-tools 
+      - bind-utils 
+      - wget 
+      - zlib-devel
+    state: present    
+
 #Disable SELINUX
 - name: Disable SELINUX
   lineinfile:
