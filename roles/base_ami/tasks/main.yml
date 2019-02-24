@@ -138,7 +138,7 @@
 
 #Add json output to ossec config 
 - lineinfile:
-    path: vi 
+    path: /var/ossec/etc/ossec.conf 
     regexp: '<global>'
     insertafter: '^<global>'
     line: '<global> <jsonout_output>yes</jsonout_output>'
