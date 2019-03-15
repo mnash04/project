@@ -143,3 +143,23 @@
     insertafter: '^<global>'
     line: '<global> <jsonout_output>yes</jsonout_output>'
 
+#Install IUS repo for python
+- name: Install ius repo
+  yum:
+    name: https://centos7.iuscommunity.org/ius-release.rpm
+    state: present
+
+#Yum install packages
+- name: Install packages
+  yum:
+    name: 
+      - python36u
+      - python36u-devel 
+      - python36u-pip
+    state: present
+
+#Install awscli with pip
+- name: Install AWSCLI
+  shell: python3.6 -m  pip install awscli --upgrade --user
+
+            
